@@ -64,7 +64,7 @@ const ContactItem = ({ label, value }: { label: string; value: string }) => {
         <input
           readOnly
           value={value}
-          className="flex-1 px-4 py-2 rounded-lg bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-prussian-blue-500 dark:text-white focus:outline-none"
+          className="flex-1 min-w-0 px-4 py-2 rounded-lg bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-prussian-blue-500 dark:text-white focus:outline-none"
         />
         <Button
           variant="outline"
@@ -313,7 +313,7 @@ function App() {
               </div>
             </div>
 
-            <div className="p-8 rounded-[2rem] glass">
+            <div className="p-6 sm:p-8 rounded-[2rem] glass">
               <ContactItem label="Email" value="joisrosafer@gmail.com" />
               <ContactItem label="Teléfono" value="+56 9 3146 6378" />
               <Button

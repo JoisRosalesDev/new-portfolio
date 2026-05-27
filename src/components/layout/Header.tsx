@@ -27,7 +27,7 @@ export const Header = () => {
         isScrolled ? 'bg-white/80 dark:bg-prussian-blue-500/80 backdrop-blur-md shadow-lg' : 'bg-transparent'
       }`}
     >
-      <nav className="max-w-7xl mx-auto flex justify-between items-center">
+      <nav className="max-w-7xl mx-auto flex justify-between items-center relative z-50">
         <a href="#home" className="text-2xl font-bold text-prussian-blue-500 dark:text-white tracking-tighter">
           JR<span className="text-orange-500">.</span>
         </a>
