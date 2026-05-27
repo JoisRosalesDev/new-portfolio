@@ -255,32 +255,24 @@ function App() {
                   ))}
                 </div>
                 <div className="flex gap-4">
-                  <a
+                  <Button
+                    variant="primary"
+                    className="flex-1 text-xs py-2.5 px-4"
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1"
                   >
-                    <Button
-                      variant="primary"
-                      className="w-full text-xs py-2.5 px-4"
-                    >
-                      Sitio Web
-                    </Button>
-                  </a>
-                  <a
+                    Sitio Web
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="flex-1 text-xs py-2.5 px-4"
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1"
                   >
-                    <Button
-                      variant="outline"
-                      className="w-full text-xs py-2.5 px-4"
-                    >
-                      Repositorio
-                    </Button>
-                  </a>
+                    Repositorio
+                  </Button>
                 </div>
               </div>
             ))}
@@ -299,32 +291,38 @@ function App() {
                 creciendo profesionalmente. Mi bandeja de entrada siempre está
                 abierta.
               </p>
-              <div className="flex gap-4">
-                <a
+            <div className="flex gap-4">
+                <Button
+                  variant="outline"
+                  className="px-8"
                   href="https://github.com/JoisRosalesDev"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button variant="outline" className="px-8">GitHub</Button>
-                </a>
-                <a
+                  GitHub
+                </Button>
+                <Button
+                  variant="outline"
+                  className="px-8"
                   href="https://www.linkedin.com/in/jois-rosales-fernández-260baa24b"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button variant="outline" className="px-8">LinkedIn</Button>
-                </a>
+                  LinkedIn
+                </Button>
               </div>
             </div>
 
             <div className="p-8 rounded-[2rem] glass">
               <ContactItem label="Email" value="joisrosafer@gmail.com" />
               <ContactItem label="Teléfono" value="+56 9 3146 6378" />
-              <a href="mailto:joisrosafer@gmail.com" className="block mt-4">
-                <Button variant="primary" className="w-full py-4 text-lg">
-                  Enviar un correo
-                </Button>
-              </a>
+              <Button
+                variant="primary"
+                className="w-full py-4 text-lg mt-4"
+                href="mailto:joisrosafer@gmail.com"
+              >
+                Enviar un correo
+              </Button>
             </div>
           </div>
         </Section>
