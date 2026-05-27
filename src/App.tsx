@@ -81,10 +81,20 @@ const ContactItem = ({ label, value }: { label: string; value: string }) => {
 const TECH_STACK = [
   {
     category: "Frontend",
-    items: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Angular", "Astro"],
+    items: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Next.js",
+      "Angular",
+      "Astro",
+    ],
   },
-  { category: "Backend", items: ["Node.js", "PostgreSQL", "Prisma", "Express"] },
-  { category: "Tools", items: ["Git", "Docker", "Vite", "Framer Motion"] },
+  {
+    category: "Backend",
+    items: ["Node.js", "PostgreSQL", "Prisma", "Express"],
+  },
+  { category: "Tools", items: ["Git"] },
 ];
 
 function App() {
@@ -291,7 +301,7 @@ function App() {
                 creciendo profesionalmente. Mi bandeja de entrada siempre está
                 abierta.
               </p>
-            <div className="flex gap-4">
+              <div className="flex gap-4">
                 <Button
                   variant="outline"
                   className="px-8"
