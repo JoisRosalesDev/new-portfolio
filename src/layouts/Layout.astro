@@ -11,6 +11,75 @@ const {
   title = 'Jois Rosales | Ingeniero Informático & Full-Stack Developer',
   description = 'Portafolio profesional de Jois Rosales Fernández — Ingeniero en Informática (Duoc UC) y Desarrollador Full-Stack (React, Next.js, PostgreSQL). Especialista en flujos de IA con Spec Driven Development (SDD) y Human-In-The-Loop (HITL).',
 } = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://joisrosales.dev';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = new URL('/image/proyectos/pipelify-cover.webp', siteUrl).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: 'Jois Rosales Fernández | Portfolio',
+      description: description,
+      inLanguage: 'es-CL',
+    },
+    {
+      '@type': 'Person',
+      '@id': `${siteUrl}/#person`,
+      name: 'Jois Rosales Fernández',
+      url: `${siteUrl}/`,
+      image: ogImageUrl,
+      jobTitle: 'Ingeniero en Informática & Full-Stack Developer',
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Flagare Consultores TI',
+      },
+      alumniOf: {
+        '@type': 'EducationalOrganization',
+        name: 'Duoc UC',
+      },
+      sameAs: [
+        'https://www.linkedin.com/in/jois-rosales-fern%C3%A1ndez-260baa24b/',
+        'https://github.com/JoisRosalesDev',
+      ],
+      knowsAbout: [
+        'Full-Stack Development',
+        'React',
+        'Next.js',
+        'PostgreSQL',
+        'Prisma',
+        'Astro',
+        'Tailwind CSS',
+        'TypeScript',
+        'GSAP',
+        'Spec Driven Development',
+        'Human-In-The-Loop',
+        'Scrum',
+      ],
+    },
+    {
+      '@type': 'ProfilePage',
+      '@id': `${siteUrl}/#webpage`,
+      url: canonicalUrl,
+      name: title,
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+      about: {
+        '@id': `${siteUrl}/#person`,
+      },
+      primaryImageOfPage: {
+        '@type': 'ImageObject',
+        url: ogImageUrl,
+      },
+      inLanguage: 'es-CL',
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -18,7 +87,9 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#090d16" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
     <meta name="generator" content={Astro.generator} />
     
     <!-- Primary Meta Tags -->
@@ -30,14 +101,25 @@ const {
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Jois Rosales Portfolio" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Jois Rosales Fernández — Full-Stack Portfolio" />
     <meta property="og:locale" content="es_CL" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImageUrl} />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     <!-- Google Fonts Preconnect & Stylesheets -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
