@@ -7,13 +7,29 @@ interface Props {
   period?: string;
   badge?: string;
   description?: string;
+  image?: string;
 }
 
-const { title, subtitle, period, badge, description } = Astro.props;
+const { title, subtitle, period, badge, description, image } = Astro.props;
 ---
 
-<div class="glass-card rounded-2xl p-6 transition-all duration-300 hover:border-emerald-500/40 hover:-translate-y-1 flex flex-col justify-between" data-reveal="education">
+<div class="glass-card rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:border-emerald-500/40 hover:-translate-y-1 flex flex-col justify-between group" data-reveal="education">
   <div>
+    {image && (
+      <div class="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden mb-4 bg-slate-900 border border-slate-750/70">
+        <img
+          src={image}
+          alt={`Acreditación de ${title}`}
+          loading="lazy"
+          decoding="async"
+          width={800}
+          height={600}
+          class="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+    )}
+
     <div class="flex items-start justify-between gap-3 mb-3">
       <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
         <TechIcon name="sparkles" size={20} />
@@ -25,7 +41,7 @@ const { title, subtitle, period, badge, description } = Astro.props;
       )}
     </div>
 
-    <h3 class="text-lg sm:text-xl font-bold font-display text-white mb-1">
+    <h3 class="text-lg sm:text-xl font-bold font-display text-white mb-1 group-hover:text-emerald-300 transition-colors">
       {title}
     </h3>
     <p class="text-sm font-medium text-cyan-300 font-display mb-2">
@@ -46,3 +62,4 @@ const { title, subtitle, period, badge, description } = Astro.props;
     </div>
   )}
 </div>
+

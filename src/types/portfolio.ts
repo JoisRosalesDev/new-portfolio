@@ -49,10 +49,12 @@ export interface EducationItem {
   institution: string;
   location: string;
   period: string;
+  image?: string;
 }
 
 export interface CertificationItem {
   title: string;
   issuer: string;
   credentialUrl?: string;
+  image?: string;
 }
