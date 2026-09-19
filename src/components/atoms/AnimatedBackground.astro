@@ -6,29 +6,74 @@
   class="fixed inset-0 pointer-events-none -z-20 overflow-hidden select-none"
   aria-hidden="true"
 >
-  <!-- 1. Ambient Background Dots Grid -->
+  <!-- 1. Ambient Cyber Dots Grid with subtle pulse -->
   <div
-    class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:28px_28px] opacity-35"
+    class="absolute inset-0 bg-[radial-gradient(#1e293b_1.25px,transparent_1.25px)] [background-size:28px_28px] opacity-40"
   ></div>
 
   <!-- 2. Animated Floating Gradient Orbs (GPU Composite Only) -->
   <!-- Orb 1: Neon Emerald (Top Left / Center) -->
   <div
-    class="absolute -top-[10%] left-[10%] w-[450px] sm:w-[650px] h-[450px] sm:h-[650px] bg-emerald-500/12 rounded-full blur-[130px] will-change-transform animate-blob-1"
+    class="absolute -top-[10%] left-[10%] w-[500px] sm:w-[700px] h-[500px] sm:h-[700px] bg-emerald-500/18 rounded-full blur-[120px] will-change-transform orb-drift-1"
   ></div>
 
   <!-- Orb 2: Electric Cyan (Mid Right) -->
   <div
-    class="absolute top-[35%] -right-[5%] w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-cyan-500/10 rounded-full blur-[140px] will-change-transform animate-blob-2"
+    class="absolute top-[30%] -right-[5%] w-[450px] sm:w-[650px] h-[450px] sm:h-[650px] bg-cyan-500/16 rounded-full blur-[130px] will-change-transform orb-drift-2"
   ></div>
 
   <!-- Orb 3: Deep Emerald / Mint (Bottom Left) -->
   <div
-    class="absolute bottom-[5%] left-[20%] w-[450px] sm:w-[650px] h-[450px] sm:h-[600px] bg-emerald-600/8 rounded-full blur-[150px] will-change-transform animate-blob-3"
+    class="absolute bottom-[5%] left-[15%] w-[500px] sm:w-[700px] h-[500px] sm:h-[650px] bg-emerald-400/14 rounded-full blur-[140px] will-change-transform orb-drift-3"
   ></div>
 
   <!-- 3. Radial Vignette Overlay to ensure text readability -->
   <div
-    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#090d16_90%)] opacity-80"
+    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#090d16_90%)] opacity-75"
   ></div>
 </div>
+
+<style>
+  @keyframes orbDrift1 {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    33% {
+      transform: translate3d(90px, -60px, 0) scale(1.15);
+    }
+    66% {
+      transform: translate3d(-60px, 80px, 0) scale(0.92);
+    }
+  }
+
+  @keyframes orbDrift2 {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    33% {
+      transform: translate3d(-80px, 90px, 0) scale(1.18);
+    }
+    66% {
+      transform: translate3d(70px, -50px, 0) scale(0.9);
+    }
+  }
+
+  @keyframes orbDrift3 {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(60px, -70px, 0) scale(1.12);
+    }
+  }
+
+  .orb-drift-1 {
+    animation: orbDrift1 16s ease-in-out infinite;
+  }
+  .orb-drift-2 {
+    animation: orbDrift2 20s ease-in-out infinite;
+  }
+  .orb-drift-3 {
+    animation: orbDrift3 24s ease-in-out infinite;
+  }
+</style>

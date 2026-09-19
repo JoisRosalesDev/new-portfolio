@@ -24,43 +24,33 @@ import Footer from '../components/organisms/Footer.astro';
 </Layout>
 
 <script>
-  import { gsap, ScrollTrigger, registerGSAP, prefersReducedMotion } from '../lib/gsap';
+  import { gsap, ScrollTrigger, registerGSAP } from '../lib/gsap';
 
   function initPortfolioAnimations() {
     if (!registerGSAP()) return;
 
-    if (prefersReducedMotion()) {
-      // Respect accessibility preference: immediately reveal all elements without transitions
-      document.querySelectorAll('[data-hero-elem], [data-reveal]').forEach((el) => {
-        if (el instanceof HTMLElement) {
-          el.style.opacity = '1';
-          el.style.transform = 'none';
-        }
-      });
-      return;
-    }
-
     const ctx = gsap.context(() => {
-      // 1. Hero Entrance Timeline (Staggered fade & slide-up)
+      // 1. Hero Entrance Timeline (Staggered kinetic fade, scale & slide-up)
       const heroElements = document.querySelectorAll('[data-hero-elem]');
       if (heroElements.length > 0) {
         gsap.from(heroElements, {
           y: 28,
+          scale: 0.98,
           opacity: 0,
           duration: 0.8,
-          stagger: 0.12,
+          stagger: 0.1,
           ease: 'power3.out',
           clearProps: 'transform,opacity',
         });
       }
 
-      // 2. Headings ScrollTrigger reveal
+      // 2. Headings ScrollTrigger reveal with expanding accent lines
       const headings = document.querySelectorAll('[data-reveal="heading"]');
       headings.forEach((heading) => {
         gsap.from(heading, {
           scrollTrigger: {
             trigger: heading,
-            start: 'top 88%',
+            start: 'top 90%',
             toggleActions: 'play none none none',
           },
           y: 24,
@@ -75,13 +65,13 @@ import Footer from '../components/organisms/Footer.astro';
       const cards = document.querySelectorAll('[data-reveal="card"]');
       if (cards.length > 0) {
         ScrollTrigger.batch(cards, {
-          start: 'top 85%',
+          start: 'top 88%',
           once: true,
           onEnter: (batch) => {
             gsap.from(batch, {
               y: 35,
               opacity: 0,
-              stagger: 0.15,
+              stagger: 0.14,
               duration: 0.7,
               ease: 'power2.out',
               clearProps: 'transform,opacity',
@@ -96,13 +86,13 @@ import Footer from '../components/organisms/Footer.astro';
       );
       if (otherCards.length > 0) {
         ScrollTrigger.batch(otherCards, {
-          start: 'top 88%',
+          start: 'top 90%',
           once: true,
           onEnter: (batch) => {
             gsap.from(batch, {
-              y: 25,
+              y: 24,
               opacity: 0,
-              stagger: 0.12,
+              stagger: 0.1,
               duration: 0.6,
               ease: 'power2.out',
               clearProps: 'transform,opacity',

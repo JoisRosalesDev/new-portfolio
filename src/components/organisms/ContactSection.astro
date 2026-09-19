@@ -5,7 +5,7 @@ import SectionHeading from '../atoms/SectionHeading.astro';
 import TechIcon from '../atoms/TechIcon.astro';
 ---
 
-<section id="contacto" class="py-20 sm:py-28 relative">
+<section id="contacto" class="py-24 sm:py-32 relative">
   <!-- Decorative background lighting -->
   <div class="absolute bottom-0 right-1/4 w-[450px] h-[350px] bg-emerald-500/5 rounded-full blur-[140px] pointer-events-none -z-10"></div>
 
@@ -20,21 +20,22 @@ import TechIcon from '../atoms/TechIcon.astro';
       <!-- Email Card -->
       <a
         href={`mailto:${personalInfo.email}`}
-        class="glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-emerald-500/50 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-emerald-500/10 group focus:outline-none focus:ring-2 focus:ring-emerald-400"
+        class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:border-emerald-500/50 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-emerald-500/10 group focus:outline-none focus:ring-2 focus:ring-emerald-400"
         aria-label={`Enviar correo a ${personalInfo.email}`}
+        data-spotlight-card
       >
         <div>
-          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4 group-hover:scale-110 transition-transform">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-5 group-hover:scale-110 transition-transform">
             <TechIcon name="mail" size={22} />
           </div>
-          <span class="font-mono text-xs text-slate-400 font-semibold tracking-wider uppercase block mb-1">
+          <span class="font-mono text-xs text-slate-400 font-semibold tracking-wider uppercase block mb-1.5">
             Correo Electrónico
           </span>
           <h3 class="text-lg font-bold font-display text-white group-hover:text-emerald-300 transition-colors break-all">
             {personalInfo.email}
           </h3>
         </div>
-        <div class="mt-6 flex items-center gap-1.5 text-xs font-mono text-emerald-400">
+        <div class="mt-8 flex items-center gap-2 text-xs font-mono text-emerald-400">
           <span>Enviar mensaje</span>
           <TechIcon name="external" size={12} />
         </div>
@@ -43,28 +44,29 @@ import TechIcon from '../atoms/TechIcon.astro';
       <!-- Phone / WhatsApp Card -->
       <a
         href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`}
-        class="glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-cyan-500/50 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-cyan-500/10 group focus:outline-none focus:ring-2 focus:ring-cyan-400"
+        class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:border-cyan-500/50 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-cyan-500/10 group focus:outline-none focus:ring-2 focus:ring-cyan-400"
         aria-label={`Llamar o escribir al teléfono ${personalInfo.phone}`}
+        data-spotlight-card
       >
         <div>
-          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-4 group-hover:scale-110 transition-transform">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition-transform">
             <TechIcon name="phone" size={22} />
           </div>
-          <span class="font-mono text-xs text-slate-400 font-semibold tracking-wider uppercase block mb-1">
+          <span class="font-mono text-xs text-slate-400 font-semibold tracking-wider uppercase block mb-1.5">
             Teléfono & WhatsApp
           </span>
           <h3 class="text-lg font-bold font-display text-white group-hover:text-cyan-300 transition-colors">
             {personalInfo.phone}
           </h3>
         </div>
-        <div class="mt-6 flex items-center gap-1.5 text-xs font-mono text-cyan-400">
+        <div class="mt-8 flex items-center gap-2 text-xs font-mono text-cyan-400">
           <span>Llamar ahora</span>
           <TechIcon name="external" size={12} />
         </div>
       </a>
 
       <!-- Location & Socials Card -->
-      <div class="glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+      <div class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between" data-spotlight-card>
         <div>
           <div class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 mb-4">
             <TechIcon name="location" size={22} />

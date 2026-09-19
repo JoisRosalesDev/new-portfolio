@@ -1,5 +1,6 @@
 ---
 import Button from '../atoms/Button.astro';
+import Logo from '../atoms/Logo.astro';
 import TechIcon from '../atoms/TechIcon.astro';
 
 const navItems = [
@@ -13,20 +14,17 @@ const navItems = [
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300 animate-fade-in-down">
+  <!-- Interactive Top Scroll Progress Line -->
+  <div
+    id="scroll-progress-bar"
+    class="absolute bottom-0 left-0 h-[3px] w-full bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-300 shadow-[0_0_12px_#10b981] origin-left scale-x-0 pointer-events-none transition-transform duration-75 ease-out z-50"
+    aria-hidden="true"
+  ></div>
+
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
     <!-- Brand Logo -->
-    <a href="#hero" class="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded-lg p-1">
-      <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center font-display font-black text-slate-950 text-base group-hover:scale-105 transition-transform shadow-md shadow-emerald-500/20">
-        JR
-      </div>
-      <div class="flex flex-col">
-        <span class="font-display font-bold text-sm sm:text-base text-white group-hover:text-emerald-300 transition-colors leading-tight">
-          Jois Rosales
-        </span>
-        <span class="font-mono text-[10px] text-emerald-400 font-medium">
-          Full-Stack Dev
-        </span>
-      </div>
+    <a href="#hero" class="focus:outline-none focus:ring-2 focus:ring-emerald-400/50 rounded-xl p-1" aria-label="Ir al inicio del portafolio de Jois Rosales">
+      <Logo size="md" />
     </a>
 
     <!-- Desktop Navigation -->
@@ -91,6 +89,7 @@ const navItems = [
 </header>
 
 <script>
+  // 1. Mobile Menu Toggle
   const toggleBtn = document.getElementById('mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -109,4 +108,70 @@ const navItems = [
       });
     });
   }
+
+  // 2. Cyber Scroll Progress Line (Native & Reliable)
+  const progressBar = document.getElementById('scroll-progress-bar');
+  function updateProgress() {
+    if (!progressBar) return;
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? Math.min(Math.max(scrollY / maxScroll, 0), 1) : 0;
+    progressBar.style.transform = `scaleX(${progress})`;
+  }
+
+  // 3. Active Nav Link Scroll Spy
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('header nav a[href^="#"]');
+  const sectionIds = ['hero', 'experiencia', 'proyectos', 'habilidades', 'educacion', 'contacto'];
+
+  function updateActiveNav() {
+    const scrollPos = (window.scrollY || document.documentElement.scrollTop) + 200;
+    let currentId = 'hero';
+
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (el) {
+        const top = el.offsetTop;
+        const height = el.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          currentId = id;
+        }
+      }
+    }
+
+    navLinks.forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href === `#${currentId}`) {
+        link.classList.add('active-nav-link');
+      } else {
+        link.classList.remove('active-nav-link');
+      }
+    });
+  }
+
+  // 4. Universal Interactive Spotlight Mouse Follower on ALL cards
+  document.addEventListener('pointermove', (e: PointerEvent) => {
+    const cards = document.querySelectorAll<HTMLElement>('.glass-card');
+    cards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      if (
+        e.clientX >= rect.left - 60 &&
+        e.clientX <= rect.right + 60 &&
+        e.clientY >= rect.top - 60 &&
+        e.clientY <= rect.bottom + 60
+      ) {
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      }
+    });
+  }, { passive: true });
+
+  // Bind scroll listeners
+  window.addEventListener('scroll', () => {
+    updateProgress();
+    updateActiveNav();
+  }, { passive: true });
+
+  // Run on initial load
+  updateProgress();
+  updateActiveNav();
 </script>

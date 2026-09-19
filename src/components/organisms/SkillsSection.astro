@@ -11,7 +11,7 @@ const categoryIcons: Record<string, 'code' | 'database' | 'terminal'> = {
 };
 ---
 
-<section id="habilidades" class="py-20 sm:py-28 relative">
+<section id="habilidades" class="py-24 sm:py-32 relative">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <SectionHeading
       eyebrow="// STACK TÉCNICO"
@@ -26,20 +26,21 @@ const categoryIcons: Record<string, 'code' | 'database' | 'terminal'> = {
 
         return (
           <div
-            class="glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-emerald-500/40 hover:-translate-y-1 group"
+            class="glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:border-emerald-500/40 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-emerald-500/10 group"
             data-reveal="skill-card"
+            data-spotlight-card
           >
             <div>
-              <div class="flex items-center gap-3 mb-5">
-                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
-                  <TechIcon name={iconName} size={20} />
+              <div class="flex items-center gap-3.5 mb-6">
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
+                  <TechIcon name={iconName} size={22} />
                 </div>
-                <h3 class="text-lg font-bold font-display text-white">
+                <h3 class="text-lg sm:text-xl font-bold font-display text-white">
                   {group.category}
                 </h3>
               </div>
 
-              <div class="flex flex-wrap gap-2">
+              <div class="flex flex-wrap gap-2.5">
                 {group.skills.map((skill) => {
                   const isHighlighted = group.highlightedSkills?.includes(skill);
                   const isSDDOrHITL =

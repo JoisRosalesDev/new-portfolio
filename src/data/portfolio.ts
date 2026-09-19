@@ -17,7 +17,7 @@ export const personalInfo: PersonalInfo = {
   email: 'joisrosafer@gmail.com',
   socials: {
     github: 'https://github.com/JoisRosalesDev',
-    linkedin: 'https://linkedin.com/in/joisrosales',
+    linkedin: 'https://www.linkedin.com/in/jois-rosales-fern%C3%A1ndez-260baa24b/',
     portfolio: 'https://joisrosales.dev',
   },
   cvUrl: '/CV_JOIS_ROSALES.md',

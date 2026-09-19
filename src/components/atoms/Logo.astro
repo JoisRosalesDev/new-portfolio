@@ -1,0 +1,125 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  showText?: boolean;
+  class?: string;
+}
+
+const { size = 'md', showText = true, class: className = '' } = Astro.props;
+
+const dimensions = {
+  sm: { icon: 28, textClass: 'text-xs', subClass: 'text-[9px]' },
+  md: { icon: 38, textClass: 'text-sm sm:text-base', subClass: 'text-[10px]' },
+  lg: { icon: 48, textClass: 'text-lg', subClass: 'text-xs' },
+}[size];
+---
+
+<div class={`flex items-center gap-3 group cursor-pointer ${className}`}>
+  <!-- Custom Artistic Architectural Monogram SVG (J + R Fusion) -->
+  <div class="relative shrink-0 flex items-center justify-center">
+    <!-- Subtle ambient glow on hover -->
+    <div
+      class="absolute inset-0 bg-gradient-to-tr from-emerald-500/40 to-cyan-500/40 rounded-xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
+    ></div>
+
+    <svg
+      width={dimensions.icon}
+      height={dimensions.icon}
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="transition-transform duration-500 ease-out group-hover:scale-105 group-hover:rotate-1"
+      aria-hidden="true"
+    >
+      <defs>
+        <!-- Primary Cyber Emerald-Cyan Gradient -->
+        <linearGradient id="logoGradPrimary" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#10b981" />
+          <stop offset="50%" stop-color="#06b6d4" />
+          <stop offset="100%" stop-color="#3b82f6" />
+        </linearGradient>
+        
+        <!-- Dark Obsidian Badge Fill Gradient -->
+        <linearGradient id="logoBgGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#131d2e" />
+          <stop offset="100%" stop-color="#090d16" />
+        </linearGradient>
+
+        <!-- Subtle Glow Filter -->
+        <filter id="logoGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#10b981" flood-opacity="0.3" />
+        </filter>
+      </defs>
+
+      <!-- Hexagonal Shield Outer Frame -->
+      <path
+        d="M24 3L42 13.5V34.5L24 45L6 34.5V13.5L24 3Z"
+        fill="url(#logoBgGrad)"
+        stroke="url(#logoGradPrimary)"
+        stroke-width="1.75"
+        stroke-linejoin="round"
+      />
+
+      <!-- Subtle inner accent line -->
+      <path
+        d="M24 7L38 15.5V32.5L24 41L10 32.5V15.5L24 7Z"
+        stroke="#1e293b"
+        stroke-width="1"
+        stroke-dasharray="3 3"
+        stroke-linejoin="round"
+      />
+
+      <!-- Monogram 'J' & 'R' Interlocking Architectural Geometry -->
+      <!-- 'J' hook on the left connecting downwards -->
+      <path
+        d="M19 16V28.5C19 31 16.5 32 14.5 31"
+        stroke="url(#logoGradPrimary)"
+        stroke-width="2.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+
+      <!-- 'R' spine, loop and diagonal leg on the center-right -->
+      <!-- Vertical spine of R (architectural pillar) -->
+      <path
+        d="M24 16V34"
+        stroke="white"
+        stroke-width="2.75"
+        stroke-linecap="round"
+      />
+      <!-- Upper bowl of R -->
+      <path
+        d="M24 16H30C32.5 16 34.5 18 34.5 20.5C34.5 23 32.5 25 30 25H24"
+        stroke="url(#logoGradPrimary)"
+        stroke-width="2.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <!-- Angled forward leg of R -->
+      <path
+        d="M29 25L35 34"
+        stroke="url(#logoGradPrimary)"
+        stroke-width="2.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+
+      <!-- Core cyber vertex dot -->
+      <circle cx="24" cy="16" r="2" fill="#10b981" filter="url(#logoGlow)" />
+    </svg>
+  </div>
+
+  {showText && (
+    <div class="flex flex-col">
+      <div class="flex items-center gap-1.5">
+        <span class={`font-display font-black tracking-wider uppercase text-white group-hover:text-emerald-300 transition-colors leading-none ${dimensions.textClass}`}>
+          Jois Rosales
+        </span>
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 group-hover:scale-125 transition-transform"></span>
+      </div>
+      <span class={`font-mono font-medium tracking-widest text-slate-400 group-hover:text-cyan-400 uppercase transition-colors leading-none mt-1 ${dimensions.subClass}`}>
+        Full-Stack Architect
+      </span>
+    </div>
+  )}
+</div>

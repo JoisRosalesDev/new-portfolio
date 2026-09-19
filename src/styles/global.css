@@ -123,30 +123,117 @@
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Glassmorphism primitives */
+/* Glassmorphism primitives: obsidian palette without chalky white borders */
 .glass-nav {
-  background: rgba(9, 13, 22, 0.8);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(9, 13, 22, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(30, 41, 59, 0.65);
 }
 
 .glass-card {
-  background: rgba(17, 24, 39, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  position: relative;
+  background: rgba(13, 19, 33, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(30, 41, 59, 0.85); /* Clean dark obsidian slate border, NO white outline */
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Gradient accents */
+.glass-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.glass-card:hover {
+  border-color: rgba(16, 185, 129, 0.55);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8),
+              0 0 35px -5px rgba(16, 185, 129, 0.22);
+}
+
+/* Interactive Spotlight Cursor Aura following mouse across the card */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    480px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+    rgba(16, 185, 129, 0.24),
+    rgba(6, 182, 212, 0.08) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 1;
+}
+
+.glass-card:hover::after {
+  opacity: 1;
+}
+
+/* Gradient accents with kinetic animation */
 .text-gradient-emerald {
-  background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+  background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 .border-gradient-emerald {
   border-image: linear-gradient(to right, #10b981, #06b6d4) 1;
+}
+
+/* Shimmer button animation with clear light sweep */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 70%
+  );
+  transform: rotate(25deg) translateX(-100%);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.btn-shimmer:hover::after {
+  transform: rotate(25deg) translateX(100%);
+}
+
+/* Active Nav Capsule Highlight */
+.active-nav-link {
+  color: #34d399 !important;
+  background-color: rgba(6, 78, 59, 0.6) !important;
+  border-color: rgba(16, 185, 129, 0.45) !important;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.3) !important;
 }
 
 /* Subtle glow effects */
@@ -172,13 +259,10 @@
   animation-delay: 500ms;
 }
 
-/* Accessibility reduced-motion guard */
+/* Non-destructive accessibility motion check: disable only large spinning / disorienting transforms */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  .animate-float,
+  .animate-pulse-slow {
+    animation: none !important;
   }
 }
