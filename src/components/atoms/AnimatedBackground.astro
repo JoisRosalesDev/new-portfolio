@@ -1,0 +1,34 @@
+---
+// src/components/atoms/AnimatedBackground.astro
+---
+
+<div
+  class="fixed inset-0 pointer-events-none -z-20 overflow-hidden select-none"
+  aria-hidden="true"
+>
+  <!-- 1. Ambient Background Dots Grid -->
+  <div
+    class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:28px_28px] opacity-35"
+  ></div>
+
+  <!-- 2. Animated Floating Gradient Orbs (GPU Composite Only) -->
+  <!-- Orb 1: Neon Emerald (Top Left / Center) -->
+  <div
+    class="absolute -top-[10%] left-[10%] w-[450px] sm:w-[650px] h-[450px] sm:h-[650px] bg-emerald-500/12 rounded-full blur-[130px] will-change-transform animate-blob-1"
+  ></div>
+
+  <!-- Orb 2: Electric Cyan (Mid Right) -->
+  <div
+    class="absolute top-[35%] -right-[5%] w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-cyan-500/10 rounded-full blur-[140px] will-change-transform animate-blob-2"
+  ></div>
+
+  <!-- Orb 3: Deep Emerald / Mint (Bottom Left) -->
+  <div
+    class="absolute bottom-[5%] left-[20%] w-[450px] sm:w-[650px] h-[450px] sm:h-[600px] bg-emerald-600/8 rounded-full blur-[150px] will-change-transform animate-blob-3"
+  ></div>
+
+  <!-- 3. Radial Vignette Overlay to ensure text readability -->
+  <div
+    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#090d16_90%)] opacity-80"
+  ></div>
+</div>

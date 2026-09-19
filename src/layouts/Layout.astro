@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import AnimatedBackground from '../components/atoms/AnimatedBackground.astro';
 
 interface Props {
   title?: string;
@@ -46,7 +47,8 @@ const {
       rel="stylesheet"
     />
   </head>
-  <body class="bg-[#090d16] text-slate-100 antialiased selection:bg-emerald-500/20 selection:text-emerald-300 min-h-screen flex flex-col">
+  <body class="bg-[#090d16] text-slate-100 antialiased selection:bg-emerald-500/20 selection:text-emerald-300 min-h-screen flex flex-col relative">
+    <AnimatedBackground />
     <slot />
   </body>
 </html>
