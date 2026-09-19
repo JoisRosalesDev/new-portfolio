@@ -18,7 +18,7 @@ export const personalInfo: PersonalInfo = {
   socials: {
     github: 'https://github.com/JoisRosalesDev',
     linkedin: 'https://www.linkedin.com/in/jois-rosales-fern%C3%A1ndez-260baa24b/',
-    portfolio: 'https://joisrosales.dev',
+    portfolio: 'https://portafolio-jois.vercel.app',
   },
   cvUrl: '/CV_JOIS_ROSALES.md',
   availableForWork: true,

@@ -12,7 +12,7 @@ const {
   description = 'Portafolio profesional de Jois Rosales Fernández — Ingeniero en Informática (Duoc UC) y Desarrollador Full-Stack (React, Next.js, PostgreSQL). Especialista en flujos de IA con Spec Driven Development (SDD) y Human-In-The-Loop (HITL).',
 } = Astro.props;
 
-const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://joisrosales.dev';
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://portafolio-jois.vercel.app';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL('/image/proyectos/pipelify-cover.webp', siteUrl).href;
 
