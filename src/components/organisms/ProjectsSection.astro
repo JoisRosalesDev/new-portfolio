@@ -1,0 +1,25 @@
+---
+import { featuredProjects } from '../../data/portfolio';
+import SectionHeading from '../atoms/SectionHeading.astro';
+import ProjectCard from '../molecules/ProjectCard.astro';
+---
+
+<section id="proyectos" class="py-20 sm:py-28 relative">
+  <!-- Subtle ambient background glow -->
+  <div class="absolute top-1/2 left-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeading
+      eyebrow="// PROYECTOS DESTACADOS"
+      title="Proyectos de Software"
+      subtitle="Soluciones construidas con Clean Code, arquitectura modular, y metodologías ágiles asistidas por IA (SDD & HITL)."
+    />
+
+    <!-- 4 Featured Project Cards Grid: Mobile 1 column, md+ 2 columns -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8" id="projects-grid">
+      {featuredProjects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </div>
+</section>

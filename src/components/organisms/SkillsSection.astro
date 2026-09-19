@@ -1,0 +1,77 @@
+---
+import { skillCategories } from '../../data/portfolio';
+import Badge from '../atoms/Badge.astro';
+import SectionHeading from '../atoms/SectionHeading.astro';
+import TechIcon from '../atoms/TechIcon.astro';
+
+const categoryIcons: Record<string, 'code' | 'database' | 'terminal'> = {
+  Frontend: 'code',
+  'Backend & Databases': 'database',
+  'Tools & Methodologies': 'terminal',
+};
+---
+
+<section id="habilidades" class="py-20 sm:py-28 relative">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeading
+      eyebrow="// STACK TÉCNICO"
+      title="Tecnologías & Metodologías"
+      subtitle="Competencias en desarrollo web moderno, persistencia de datos, y flujos de ingeniería asistida por Inteligencia Artificial."
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+      {skillCategories.map((group) => {
+        const iconName = categoryIcons[group.category] || 'code';
+        const isMethodologyGroup = group.category === 'Tools & Methodologies';
+
+        return (
+          <div
+            class="glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-emerald-500/40 hover:-translate-y-1 group"
+            data-reveal="skill-card"
+          >
+            <div>
+              <div class="flex items-center gap-3 mb-5">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
+                  <TechIcon name={iconName} size={20} />
+                </div>
+                <h3 class="text-lg font-bold font-display text-white">
+                  {group.category}
+                </h3>
+              </div>
+
+              <div class="flex flex-wrap gap-2">
+                {group.skills.map((skill) => {
+                  const isHighlighted = group.highlightedSkills?.includes(skill);
+                  const isSDDOrHITL =
+                    skill.includes('SDD') || skill.includes('HITL') || skill.includes('Spec Driven');
+
+                  return (
+                    <Badge
+                      text={skill}
+                      size="md"
+                      variant={
+                        isSDDOrHITL
+                          ? 'methodology'
+                          : isHighlighted
+                          ? 'emerald'
+                          : 'default'
+                      }
+                    />
+                  );
+                })}
+              </div>
+            </div>
+
+            {isMethodologyGroup && (
+              <div class="mt-6 pt-4 border-t border-slate-800/80">
+                <p class="text-xs text-cyan-300 font-mono">
+                  ★ Enfoque pionero en desarrollo dirigido por especificaciones (SDD) y revisión humana en el bucle (HITL).
+                </p>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

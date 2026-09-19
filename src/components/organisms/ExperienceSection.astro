@@ -1,0 +1,21 @@
+---
+import { experienceData } from '../../data/portfolio';
+import SectionHeading from '../atoms/SectionHeading.astro';
+import ExperienceCard from '../molecules/ExperienceCard.astro';
+---
+
+<section id="experiencia" class="py-20 sm:py-28 relative">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeading
+      eyebrow="// TRAYECTORIA"
+      title="Experiencia Profesional"
+      subtitle="Evolución técnica y aportes de ingeniería de software en proyectos reales de producción."
+    />
+
+    <div class="space-y-8">
+      {experienceData.map((exp) => (
+        <ExperienceCard company={exp.company} roles={exp.roles} />
+      ))}
+    </div>
+  </div>
+</section>

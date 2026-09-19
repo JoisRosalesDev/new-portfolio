@@ -1,0 +1,112 @@
+---
+import Button from '../atoms/Button.astro';
+import TechIcon from '../atoms/TechIcon.astro';
+
+const navItems = [
+  { label: 'Inicio', href: '#hero' },
+  { label: 'Experiencia', href: '#experiencia' },
+  { label: 'Proyectos', href: '#proyectos' },
+  { label: 'Habilidades', href: '#habilidades' },
+  { label: 'Educación', href: '#educacion' },
+  { label: 'Contacto', href: '#contacto' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300 animate-fade-in-down">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+    <!-- Brand Logo -->
+    <a href="#hero" class="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded-lg p-1">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center font-display font-black text-slate-950 text-base group-hover:scale-105 transition-transform shadow-md shadow-emerald-500/20">
+        JR
+      </div>
+      <div class="flex flex-col">
+        <span class="font-display font-bold text-sm sm:text-base text-white group-hover:text-emerald-300 transition-colors leading-tight">
+          Jois Rosales
+        </span>
+        <span class="font-mono text-[10px] text-emerald-400 font-medium">
+          Full-Stack Dev
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center gap-1 bg-slate-900/60 p-1.5 rounded-full border border-slate-800 backdrop-blur-md">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="px-3.5 py-1.5 rounded-full text-xs font-medium font-display text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all focus:outline-none focus:ring-1 focus:ring-emerald-400"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="hidden sm:flex items-center gap-3">
+      <Button
+        href="#contacto"
+        variant="primary"
+        size="sm"
+        class="text-xs font-semibold"
+      >
+        <span>Contáctame</span>
+      </Button>
+    </div>
+
+    <!-- Mobile Menu Toggle Button -->
+    <button
+      id="mobile-menu-toggle"
+      type="button"
+      class="md:hidden w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-emerald-400"
+      aria-label="Abrir menú de navegación"
+      aria-expanded="false"
+    >
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation Drawer -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden px-4 pt-2 pb-6 glass-card border-b border-slate-800 bg-[#090d16]/95 backdrop-blur-2xl transition-all"
+  >
+    <nav class="flex flex-col gap-2 pt-2">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="mobile-link px-4 py-2.5 rounded-xl text-sm font-medium font-display text-slate-200 hover:text-white hover:bg-slate-850 transition-colors"
+        >
+          {item.label}
+        </a>
+      ))}
+      <div class="pt-4 mt-2 border-t border-slate-800">
+        <Button href="#contacto" variant="primary" size="md" class="w-full">
+          Contáctame
+        </Button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  if (toggleBtn && mobileMenu) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+</script>

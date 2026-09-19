@@ -1,0 +1,44 @@
+---
+import { certificationData, educationData } from '../../data/portfolio';
+import SectionHeading from '../atoms/SectionHeading.astro';
+import EducationCard from '../molecules/EducationCard.astro';
+---
+
+<section id="educacion" class="py-20 sm:py-28 relative">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeading
+      eyebrow="// FORMACIÓN ACADÉMICA"
+      title="Educación & Certificaciones"
+      subtitle="Credenciales universitarias y certificaciones formales que respaldan mis competencias técnicas y metodológicas."
+    />
+
+    <!-- Degree Prominently Displayed -->
+    <div class="mb-8">
+      {educationData.map((edu) => (
+        <EducationCard
+          title={edu.degree}
+          subtitle={`${edu.institution} — ${edu.location}`}
+          period={edu.period}
+          badge="Grado Académico"
+          description="Formación integral en ciencias de la computación, arquitectura de software, bases de datos relacionales, ingeniería de requerimientos y desarrollo de aplicaciones web full-stack."
+        />
+      ))}
+    </div>
+
+    <!-- Certifications Grid -->
+    <h3 class="text-xl font-bold font-display text-slate-200 mb-4 flex items-center gap-2">
+      <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+      Certificaciones Profesionales
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {certificationData.map((cert) => (
+        <EducationCard
+          title={cert.title}
+          subtitle={cert.issuer}
+          badge="Acreditado"
+        />
+      ))}
+    </div>
+  </div>
+</section>

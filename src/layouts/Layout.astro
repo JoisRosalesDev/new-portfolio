@@ -1,30 +1,52 @@
 ---
+import '../styles/global.css';
 
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Jois Rosales | Ingeniero Informático & Full-Stack Developer',
+  description = 'Portafolio profesional de Jois Rosales Fernández — Ingeniero en Informática (Duoc UC) y Desarrollador Full-Stack (React, Next.js, PostgreSQL). Especialista en flujos de IA con Spec Driven Development (SDD) y Human-In-The-Loop (HITL).',
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="dark scroll-smooth">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>
-      Portafolio - Jois Rosales | Software Engineer | Full-Stack Developer |
-      React, Next.js & Tailwind | IA Aplicada (SDD & HITL)
-    </title>
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Jois Rosales Fernández" />
+    <meta name="keywords" content="Jois Rosales, Full-Stack Developer, React, Next.js, Astro, Tailwind CSS, PostgreSQL, Spec Driven Development, SDD, HITL, Duoc UC, Flagare Consultores" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_CL" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+
+    <!-- Google Fonts Preconnect & Stylesheets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body class="bg-[#090d16] text-slate-100 antialiased selection:bg-emerald-500/20 selection:text-emerald-300 min-h-screen flex flex-col">
     <slot />
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

@@ -1,11 +1,131 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Navbar from '../components/organisms/Navbar.astro';
+import HeroSection from '../components/organisms/HeroSection.astro';
+import ExperienceSection from '../components/organisms/ExperienceSection.astro';
+import ProjectsSection from '../components/organisms/ProjectsSection.astro';
+import SkillsSection from '../components/organisms/SkillsSection.astro';
+import EducationSection from '../components/organisms/EducationSection.astro';
+import ContactSection from '../components/organisms/ContactSection.astro';
+import Footer from '../components/organisms/Footer.astro';
 ---
 
 <Layout>
-	<Welcome />
+  <Navbar />
+  <main id="main-content" class="flex-grow">
+    <HeroSection />
+    <ExperienceSection />
+    <ProjectsSection />
+    <SkillsSection />
+    <EducationSection />
+    <ContactSection />
+  </main>
+  <Footer />
 </Layout>
+
+<script>
+  import { gsap, ScrollTrigger, registerGSAP, prefersReducedMotion } from '../lib/gsap';
+
+  function initPortfolioAnimations() {
+    if (!registerGSAP()) return;
+
+    if (prefersReducedMotion()) {
+      // Respect accessibility preference: immediately reveal all elements without transitions
+      document.querySelectorAll('[data-hero-elem], [data-reveal]').forEach((el) => {
+        if (el instanceof HTMLElement) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        }
+      });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      // 1. Hero Entrance Timeline (Staggered fade & slide-up)
+      const heroElements = document.querySelectorAll('[data-hero-elem]');
+      if (heroElements.length > 0) {
+        gsap.from(heroElements, {
+          y: 28,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: 'power3.out',
+          clearProps: 'transform,opacity',
+        });
+      }
+
+      // 2. Headings ScrollTrigger reveal
+      const headings = document.querySelectorAll('[data-reveal="heading"]');
+      headings.forEach((heading) => {
+        gsap.from(heading, {
+          scrollTrigger: {
+            trigger: heading,
+            start: 'top 88%',
+            toggleActions: 'play none none none',
+          },
+          y: 24,
+          opacity: 0,
+          duration: 0.65,
+          ease: 'power2.out',
+          clearProps: 'transform,opacity',
+        });
+      });
+
+      // 3. Project Cards Batch ScrollTrigger reveal
+      const cards = document.querySelectorAll('[data-reveal="card"]');
+      if (cards.length > 0) {
+        ScrollTrigger.batch(cards, {
+          start: 'top 85%',
+          once: true,
+          onEnter: (batch) => {
+            gsap.from(batch, {
+              y: 35,
+              opacity: 0,
+              stagger: 0.15,
+              duration: 0.7,
+              ease: 'power2.out',
+              clearProps: 'transform,opacity',
+            });
+          },
+        });
+      }
+
+      // 4. Experience, Skills & Education cards reveal
+      const otherCards = document.querySelectorAll(
+        '[data-reveal="experience"], [data-reveal="skill-card"], [data-reveal="education"]'
+      );
+      if (otherCards.length > 0) {
+        ScrollTrigger.batch(otherCards, {
+          start: 'top 88%',
+          once: true,
+          onEnter: (batch) => {
+            gsap.from(batch, {
+              y: 25,
+              opacity: 0,
+              stagger: 0.12,
+              duration: 0.6,
+              ease: 'power2.out',
+              clearProps: 'transform,opacity',
+            });
+          },
+        });
+      }
+    });
+
+    // Cleanup on navigation or lifecycle refresh
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        ctx.revert();
+      },
+      { once: true }
+    );
+  }
+
+  // Initialize after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPortfolioAnimations);
+  } else {
+    initPortfolioAnimations();
+  }
+</script>

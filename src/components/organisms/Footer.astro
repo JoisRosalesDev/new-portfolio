@@ -1,0 +1,35 @@
+---
+import TechIcon from '../atoms/TechIcon.astro';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="mt-auto py-10 border-t border-slate-850 bg-slate-950/60">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <div class="w-6 h-6 rounded-md bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center font-display font-black text-slate-950 text-xs">
+        JR
+      </div>
+      <p class="text-xs text-slate-400 font-sans">
+        © {currentYear} Jois Rosales Fernández. Todos los derechos reservados.
+      </p>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <p class="text-xs text-slate-400 font-mono hidden md:block">
+        Astro 7 • Tailwind v4 • Atomic Design • SDD & HITL
+      </p>
+
+      <a
+        href="#hero"
+        class="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400 hover:text-emerald-300 transition-colors p-1 rounded focus:outline-none focus:ring-1 focus:ring-emerald-400"
+        aria-label="Volver al inicio de la página"
+      >
+        <span>Volver arriba</span>
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
