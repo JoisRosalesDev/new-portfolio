@@ -50,6 +50,7 @@ export interface EducationItem {
   location: string;
   period: string;
   image?: string;
+  badge?: string;
 }
 
 export interface CertificationItem {
@@ -57,4 +58,9 @@ export interface CertificationItem {
   issuer: string;
   credentialUrl?: string;
   image?: string;
+}
+
+export interface LanguageItem {
+  name: string;
+  level: string;
 }

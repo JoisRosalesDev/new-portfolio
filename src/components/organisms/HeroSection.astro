@@ -49,8 +49,18 @@ import TechIcon from '../atoms/TechIcon.astro';
         </Button>
 
         <Button
-          href="#contacto"
+          href={personalInfo.cvUrl}
+          target="_blank"
           variant="secondary"
+          size="lg"
+        >
+          <span>Ver CV</span>
+          <TechIcon name="download" size={16} />
+        </Button>
+
+        <Button
+          href="#contacto"
+          variant="outline"
           size="lg"
         >
           <span>Contáctame</span>

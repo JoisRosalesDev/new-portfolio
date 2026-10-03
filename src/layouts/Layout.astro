@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = 'Jois Rosales | Ingeniero Informático & Full-Stack Developer',
-  description = 'Portafolio profesional de Jois Rosales Fernández — Ingeniero en Informática (Duoc UC) y Desarrollador Full-Stack (React, Next.js, PostgreSQL). Especialista en flujos de IA con Spec Driven Development (SDD) y Human-In-The-Loop (HITL).',
+  title = 'Jois Rosales | Ingeniero en Informática & Full-Stack Developer',
+  description = 'Portafolio profesional de Jois Rosales Fernández — Ingeniero en Informática titulado (Duoc UC) y Desarrollador Full-Stack (React, Next.js, Prisma, PostgreSQL). Especialista en flujos de IA con Spec Driven Development (SDD) y Human-In-The-Loop (HITL).',
 } = Astro.props;
 
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://portafolio-jois.vercel.app';
@@ -43,7 +43,7 @@ const jsonLd = {
         name: 'Duoc UC',
       },
       sameAs: [
-        'https://www.linkedin.com/in/jois-rosales-fern%C3%A1ndez-260baa24b/',
+        'https://www.linkedin.com/in/jois-rosales',
         'https://github.com/JoisRosalesDev',
       ],
       knowsAbout: [
@@ -52,10 +52,16 @@ const jsonLd = {
         'Next.js',
         'PostgreSQL',
         'Prisma',
+        'FastAPI',
+        'Python',
+        'Redis',
+        'Docker',
         'Astro',
         'Tailwind CSS',
         'TypeScript',
-        'GSAP',
+        'Supabase',
+        'Claude Code',
+        'Antigravity CLI',
         'Spec Driven Development',
         'Human-In-The-Loop',
         'Scrum',
@@ -97,7 +103,7 @@ const jsonLd = {
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content="Jois Rosales Fernández" />
-    <meta name="keywords" content="Jois Rosales, Full-Stack Developer, React, Next.js, Astro, Tailwind CSS, PostgreSQL, Spec Driven Development, SDD, HITL, Duoc UC, Flagare Consultores" />
+    <meta name="keywords" content="Jois Rosales, Ingeniero en Informática, Full-Stack Developer, React, Next.js, Prisma, PostgreSQL, Redis, Docker, FastAPI, Python, Astro, Tailwind CSS, Spec Driven Development, SDD, HITL, Claude Code, Duoc UC, Flagare Consultores" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />

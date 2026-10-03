@@ -1,6 +1,7 @@
 ---
-import { certificationData, educationData } from '../../data/portfolio';
+import { certificationData, educationData, languagesData } from '../../data/portfolio';
 import SectionHeading from '../atoms/SectionHeading.astro';
+import TechIcon from '../atoms/TechIcon.astro';
 import EducationCard from '../molecules/EducationCard.astro';
 ---
 
@@ -19,13 +20,13 @@ import EducationCard from '../molecules/EducationCard.astro';
           title={edu.degree}
           subtitle={`${edu.institution} — ${edu.location}`}
           period={edu.period}
-          badge="Grado Académico"
+          badge={edu.badge || "Titulado"}
           description="Formación integral en ciencias de la computación, arquitectura de software, bases de datos relacionales, ingeniería de requerimientos y desarrollo de aplicaciones web full-stack."
         />
       ))}
     </div>
 
-    <!-- Certifications Grid -->
+    <!-- Certificaciones Grid -->
     <h3 class="text-xl font-bold font-display text-slate-200 mb-4 flex items-center gap-2">
       <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
       Certificaciones Profesionales
@@ -40,6 +41,34 @@ import EducationCard from '../molecules/EducationCard.astro';
           image={cert.image}
         />
       ))}
+    </div>
+
+    <!-- Languages Section -->
+    <div class="mt-8 glass-card rounded-2xl p-6 sm:p-7 border border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-5" data-reveal="education" data-spotlight-card>
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+          <TechIcon name="sparkles" size={20} />
+        </div>
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block leading-none mb-1">
+            Competencias Comunicativas
+          </span>
+          <h4 class="text-base sm:text-lg font-bold font-display text-white leading-none">
+            Idiomas
+          </h4>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        {languagesData.map((lang) => (
+          <div class="px-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-sm font-mono text-slate-300 flex items-center gap-2 shadow-sm">
+            <span class={lang.level.includes('Nativo') ? 'text-emerald-400 font-bold' : 'text-cyan-400 font-bold'}>
+              {lang.name}:
+            </span>
+            <span class="text-slate-200">{lang.level}</span>
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
