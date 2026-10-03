@@ -23,5 +23,6 @@ Actualizar de forma minuciosa y fidedigna todo el contenido del portafolio web b
 - [x] Task 5: Ejecutar build de producción (`pnpm run build`) y verificar integridad total
 
 ## Evidencia de Verificación
+- Commit: `41f8318` (`feat(portfolio): actualizar contenido, experiencia y stack segun nuevo CV`)
 - `pnpm run build`: Compilación limpia en 995ms sin errores de tipos ni advertencias.
 - Validación de contenido en HTML generado (`dist/index.html`): Métricas de 70 incidencias, 100 correos Redis, titulación Duoc UC, idiomas y nuevo URL de LinkedIn (`in/jois-rosales`) verificadas exitosamente.
