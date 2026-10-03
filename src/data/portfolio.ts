@@ -172,6 +172,7 @@ export const educationData: EducationItem[] = [
     location: 'Santiago, Chile',
     period: 'Marzo 2022 - Junio 2026',
     badge: 'Titulado',
+    image: '/image/certificados/certificado-título-profesional.webp',
   },
 ];
 
@@ -185,11 +186,6 @@ export const certificationData: CertificationItem[] = [
     title: 'English Language Certificate (B1 Level)',
     issuer: 'TalkChile',
     image: '/image/certificados/certificado-inglés.webp',
-  },
-  {
-    title: 'Certificado de Título Profesional',
-    issuer: 'Duoc UC',
-    image: '/image/certificados/certificado-título-profesional.webp',
   },
 ];
 

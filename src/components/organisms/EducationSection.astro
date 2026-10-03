@@ -21,6 +21,7 @@ import EducationCard from '../molecules/EducationCard.astro';
           subtitle={`${edu.institution} — ${edu.location}`}
           period={edu.period}
           badge={edu.badge || "Titulado"}
+          image={edu.image}
           description="Formación integral en ciencias de la computación, arquitectura de software, bases de datos relacionales, ingeniería de requerimientos y desarrollo de aplicaciones web full-stack."
         />
       ))}
@@ -32,7 +33,7 @@ import EducationCard from '../molecules/EducationCard.astro';
       Certificaciones Profesionales
     </h3>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {certificationData.map((cert) => (
         <EducationCard
           title={cert.title}

@@ -76,4 +76,13 @@
   .orb-drift-3 {
     animation: orbDrift3 24s ease-in-out infinite;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orb-drift-1,
+    .orb-drift-2,
+    .orb-drift-3 {
+      animation: none !important;
+      transform: none !important;
+    }
+  }
 </style>

@@ -13,6 +13,14 @@ const navItems = [
 ];
 ---
 
+<!-- Accessible Skip Link for Keyboard/Screen Reader Navigation -->
+<a
+  href="#main-content"
+  class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-emerald-500 focus:text-emerald-950 focus:font-bold focus:rounded-xl focus:shadow-2xl focus:outline-none focus:ring-2 focus:ring-emerald-300"
+>
+  Saltar al contenido principal
+</a>
+
 <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300 animate-fade-in-down">
   <!-- Interactive Top Scroll Progress Line -->
   <div
@@ -58,9 +66,13 @@ const navItems = [
       class="md:hidden w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-emerald-400"
       aria-label="Abrir menú de navegación"
       aria-expanded="false"
+      aria-controls="mobile-menu"
     >
-      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg id="hamburger-icon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+      <svg id="close-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
@@ -68,6 +80,9 @@ const navItems = [
   <!-- Mobile Navigation Drawer -->
   <div
     id="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Menú de navegación móvil"
     class="hidden md:hidden px-4 pt-2 pb-6 glass-card border-b border-slate-800 bg-[#090d16]/95 backdrop-blur-2xl transition-all"
   >
     <nav class="flex flex-col gap-2 pt-2">
@@ -80,7 +95,7 @@ const navItems = [
         </a>
       ))}
       <div class="pt-4 mt-2 border-t border-slate-800">
-        <Button href="#contacto" variant="primary" size="md" class="w-full">
+        <Button href="#contacto" variant="primary" size="md" class="w-full mobile-link">
           Contáctame
         </Button>
       </div>
@@ -89,23 +104,57 @@ const navItems = [
 </header>
 
 <script>
-  // 1. Mobile Menu Toggle
+  // 1. Mobile Menu Toggle & Accessible Dismissal
   const toggleBtn = document.getElementById('mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileLinks = document.querySelectorAll('.mobile-link');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  function closeDrawer() {
+    if (!mobileMenu || !toggleBtn) return;
+    mobileMenu.classList.add('hidden');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    hamburgerIcon?.classList.remove('hidden');
+    closeIcon?.classList.add('hidden');
+  }
+
+  function openDrawer() {
+    if (!mobileMenu || !toggleBtn) return;
+    mobileMenu.classList.remove('hidden');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    hamburgerIcon?.classList.add('hidden');
+    closeIcon?.classList.remove('hidden');
+  }
 
   if (toggleBtn && mobileMenu) {
-    toggleBtn.addEventListener('click', () => {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-      toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
-      mobileMenu.classList.toggle('hidden');
+      if (isExpanded) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
     });
 
     mobileLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        toggleBtn.setAttribute('aria-expanded', 'false');
-      });
+      link.addEventListener('click', closeDrawer);
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target as Node) && !toggleBtn.contains(e.target as Node)) {
+        closeDrawer();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+        closeDrawer();
+        toggleBtn.focus();
+      }
     });
   }
 
@@ -148,22 +197,15 @@ const navItems = [
     });
   }
 
-  // 4. Universal Interactive Spotlight Mouse Follower on ALL cards
-  document.addEventListener('pointermove', (e: PointerEvent) => {
-    const cards = document.querySelectorAll<HTMLElement>('.glass-card');
-    cards.forEach((card) => {
+  // 4. Performant Card Spotlight Mouse Follower (Local listeners, Zero Layout Thrashing)
+  const spotlightCards = document.querySelectorAll<HTMLElement>('[data-spotlight-card]');
+  spotlightCards.forEach((card) => {
+    card.addEventListener('pointermove', (e: PointerEvent) => {
       const rect = card.getBoundingClientRect();
-      if (
-        e.clientX >= rect.left - 60 &&
-        e.clientX <= rect.right + 60 &&
-        e.clientY >= rect.top - 60 &&
-        e.clientY <= rect.bottom + 60
-      ) {
-        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-      }
-    });
-  }, { passive: true });
+      card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    }, { passive: true });
+  });
 
   // Bind scroll listeners
   window.addEventListener('scroll', () => {

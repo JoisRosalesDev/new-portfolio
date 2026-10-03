@@ -54,14 +54,14 @@ const { project, class: className = '' } = Astro.props;
       )}
     </div>
 
-    <!-- Titles with generous spacing -->
+    <!-- Titles with natural hierarchy -->
     <div class="mb-4">
-      <span class="font-mono text-xs font-semibold text-cyan-400 tracking-wider uppercase block mb-1.5">
-        {project.subtitle}
-      </span>
-      <h3 class="text-xl sm:text-2xl font-bold font-display text-white group-hover:text-emerald-300 transition-colors">
+      <h3 class="text-xl sm:text-2xl font-bold font-display text-white group-hover:text-emerald-300 transition-colors mb-1.5">
         {project.title}
       </h3>
+      <p class="text-sm font-medium text-cyan-300 font-display">
+        {project.subtitle}
+      </p>
     </div>
 
     <!-- Description -->

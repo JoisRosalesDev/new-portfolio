@@ -177,24 +177,7 @@
   opacity: 1;
 }
 
-/* Gradient accents with kinetic animation */
-.text-gradient-emerald {
-  background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #3b82f6 100%);
-  background-size: 200% 200%;
-  animation: gradientShift 6s ease infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
+/* Accents */
 .border-gradient-emerald {
   border-image: linear-gradient(to right, #10b981, #06b6d4) 1;
 }
@@ -259,10 +242,19 @@
   animation-delay: 500ms;
 }
 
-/* Non-destructive accessibility motion check: disable only large spinning / disorienting transforms */
+/* Accessibility motion check: disable continuous motion for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
   .animate-float,
-  .animate-pulse-slow {
+  .animate-pulse-slow,
+  .btn-shimmer {
     animation: none !important;
   }
 }

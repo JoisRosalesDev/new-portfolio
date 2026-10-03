@@ -40,27 +40,60 @@ const categoryIcons: Record<string, 'code' | 'database' | 'terminal'> = {
                 </h3>
               </div>
 
-              <div class="flex flex-wrap gap-2.5">
-                {group.skills.map((skill) => {
-                  const isHighlighted = group.highlightedSkills?.includes(skill);
-                  const isSDDOrHITL =
-                    skill.includes('SDD') || skill.includes('HITL') || skill.includes('Spec Driven');
+              {(() => {
+                const coreSkills = group.skills.filter(
+                  (skill) =>
+                    group.highlightedSkills?.includes(skill) ||
+                    skill.includes('SDD') ||
+                    skill.includes('HITL') ||
+                    skill.includes('Spec Driven')
+                );
+                const secondarySkills = group.skills.filter(
+                  (skill) => !coreSkills.includes(skill)
+                );
 
-                  return (
-                    <Badge
-                      text={skill}
-                      size="md"
-                      variant={
-                        isSDDOrHITL
-                          ? 'methodology'
-                          : isHighlighted
-                          ? 'emerald'
-                          : 'default'
-                      }
-                    />
-                  );
-                })}
-              </div>
+                return (
+                  <div class="space-y-4">
+                    <div>
+                      <span class="text-[10px] font-mono text-emerald-400 font-semibold uppercase tracking-wider block mb-2.5">
+                        Stack Principal
+                      </span>
+                      <div class="flex flex-wrap gap-2">
+                        {coreSkills.map((skill) => {
+                          const isSDDOrHITL =
+                            skill.includes('SDD') ||
+                            skill.includes('HITL') ||
+                            skill.includes('Spec Driven');
+                          return (
+                            <Badge
+                              text={skill}
+                              size="md"
+                              variant={isSDDOrHITL ? 'methodology' : 'emerald'}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {secondarySkills.length > 0 && (
+                      <div class="pt-3 border-t border-slate-800/60">
+                        <span class="text-[10px] font-mono text-slate-400 font-semibold uppercase tracking-wider block mb-2">
+                          Ecosistema & Herramientas
+                        </span>
+                        <div class="flex flex-wrap gap-1.5">
+                          {secondarySkills.map((skill) => (
+                            <Badge
+                              text={skill}
+                              size="sm"
+                              variant="default"
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
             </div>
 
             {isMethodologyGroup && (

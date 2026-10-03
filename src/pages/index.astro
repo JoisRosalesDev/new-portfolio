@@ -24,10 +24,21 @@ import Footer from '../components/organisms/Footer.astro';
 </Layout>
 
 <script>
-  import { gsap, ScrollTrigger, registerGSAP } from '../lib/gsap';
+  import { gsap, ScrollTrigger, registerGSAP, prefersReducedMotion } from '../lib/gsap';
 
   function initPortfolioAnimations() {
     if (!registerGSAP()) return;
+
+    if (prefersReducedMotion()) {
+      // Respect user's vestibular and motion preferences: ensure full visibility without transforms
+      gsap.set('[data-hero-elem], [data-reveal]', {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        clearProps: 'all',
+      });
+      return;
+    }
 
     const ctx = gsap.context(() => {
       // 1. Hero Entrance Timeline (Staggered kinetic fade, scale & slide-up)
