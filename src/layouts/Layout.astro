@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import AnimatedBackground from '../components/atoms/AnimatedBackground.astro';
+import { personalInfo } from '../data/portfolio';
+import { generateJsonLd } from '../utils/seo';
 
 interface Props {
   title?: string;
@@ -16,76 +18,13 @@ const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https:/
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL('/image/proyectos/pipelify-cover.webp', siteUrl).href;
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebSite',
-      '@id': `${siteUrl}/#website`,
-      url: `${siteUrl}/`,
-      name: 'Jois Rosales Fernández | Portfolio',
-      description: description,
-      inLanguage: 'es-CL',
-    },
-    {
-      '@type': 'Person',
-      '@id': `${siteUrl}/#person`,
-      name: 'Jois Rosales Fernández',
-      url: `${siteUrl}/`,
-      image: ogImageUrl,
-      jobTitle: 'Ingeniero en Informática & Full-Stack Developer',
-      worksFor: {
-        '@type': 'Organization',
-        name: 'Flagare Consultores TI',
-      },
-      alumniOf: {
-        '@type': 'EducationalOrganization',
-        name: 'Duoc UC',
-      },
-      sameAs: [
-        'https://www.linkedin.com/in/jois-rosales',
-        'https://github.com/JoisRosalesDev',
-      ],
-      knowsAbout: [
-        'Full-Stack Development',
-        'React',
-        'Next.js',
-        'PostgreSQL',
-        'Prisma',
-        'FastAPI',
-        'Python',
-        'Redis',
-        'Docker',
-        'Astro',
-        'Tailwind CSS',
-        'TypeScript',
-        'Supabase',
-        'Claude Code',
-        'Antigravity CLI',
-        'Spec Driven Development',
-        'Human-In-The-Loop',
-        'Scrum',
-      ],
-    },
-    {
-      '@type': 'ProfilePage',
-      '@id': `${siteUrl}/#webpage`,
-      url: canonicalUrl,
-      name: title,
-      isPartOf: {
-        '@id': `${siteUrl}/#website`,
-      },
-      about: {
-        '@id': `${siteUrl}/#person`,
-      },
-      primaryImageOfPage: {
-        '@type': 'ImageObject',
-        url: ogImageUrl,
-      },
-      inLanguage: 'es-CL',
-    },
-  ],
-};
+const jsonLd = generateJsonLd(personalInfo, {
+  siteUrl,
+  canonicalUrl,
+  ogImageUrl,
+  title,
+  description,
+});
 ---
 
 <!doctype html>

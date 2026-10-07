@@ -199,3 +199,40 @@ export const languagesData: LanguageItem[] = [
     level: 'Intermedio (B1)',
   },
 ];
+
+export interface FlatSkill {
+  name: string;
+  category: string;
+  level: string;
+}
+
+export interface FlatExperience {
+  company: string;
+  role: string;
+  period: string;
+  description: string;
+  highlights: string[];
+}
+
+export const skills: FlatSkill[] = skillCategories.flatMap((cat) =>
+  cat.skills.map((skill) => ({
+    name: skill,
+    category: cat.category,
+    level: cat.highlightedSkills?.includes(skill) ? 'Avanzado' : 'Intermedio',
+  }))
+);
+
+export const experiences: FlatExperience[] = experienceData.flatMap((exp) =>
+  exp.roles.map((role) => ({
+    company: exp.company,
+    role: role.title,
+    period: role.period,
+    description: role.achievements.join(' '),
+    highlights: role.achievements,
+  }))
+);
+
+export const projects: Project[] = featuredProjects;
+
+export const education: EducationItem[] = educationData;
+
