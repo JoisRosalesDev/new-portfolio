@@ -10,21 +10,21 @@ interface Props {
 const { company, roles } = Astro.props;
 ---
 
-<div class="glass-card rounded-2xl p-5 sm:p-6 relative overflow-hidden" data-reveal="experience" data-spotlight-card>
+<div class="glass-card rounded-2xl px-5 sm:px-6 pt-4 sm:pt-5 pb-5 sm:pb-6 relative overflow-hidden" data-reveal="experience" data-spotlight-card>
   <!-- Accent corner border glow -->
   <div class="absolute -top-10 -right-10 size-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
 
-  <div class="flex items-center gap-3 mb-5 pb-3.5 border-b border-slate-800/80">
-    <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
-      <TechIcon name="terminal" size={18} />
+  <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-slate-800/80">
+    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+      <TechIcon name="terminal" size={16} />
     </div>
-    <div>
-      <span class="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-semibold block leading-none mb-1">
-        Empresa
-      </span>
-      <h3 class="text-lg sm:text-xl font-bold font-display text-white leading-none">
+    <div class="flex flex-wrap items-center gap-2">
+      <h3 class="text-base sm:text-lg font-bold font-display text-white leading-none">
         {company}
       </h3>
+      <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400/90 font-semibold px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-500/20">
+        Empresa
+      </span>
     </div>
   </div>
 
