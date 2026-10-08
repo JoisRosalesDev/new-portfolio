@@ -53,15 +53,23 @@ Chain strategy: single-pr
 - [x] 3.1 Crear `.github/workflows/ci.yml` configurado para ejecutar `pnpm install`, `pnpm run check`, `pnpm run test` y `pnpm run build` en pushes y pull requests a `main`
 
 ### Phase 4: Verificación Integral
-- [x] 4.1 Ejecutar suite completa localmente (`pnpm run check`, `pnpm run test`, `pnpm run build`) y registrar evidencia
+### Phase 5: CI Hardening (Estándar de la Industria & Skill)
+- [x] 5.1 Resolver vulnerabilidades en dependencias y habilitar `pnpm audit --audit-level=high`
+- [x] 5.2 Incorporar métricas de cobertura de código con `@vitest/coverage-v8` (`pnpm run test:coverage`)
+- [x] 5.3 Excluir directorio `coverage/` en `.gitignore` y `tsconfig.json` para evitar interferencias con `astro check`
+- [x] 5.4 Actualizar `.github/workflows/ci.yml` con los quality gates adicionales
 
 ## Evidencia de Verificación
 
-### 1. Typecheck (`pnpm run check`)
+### 1. Security Audit (`pnpm audit --audit-level=high`)
+```
+No known vulnerabilities found
+```
+Exit code: 0
+
+### 2. Typecheck (`pnpm run check`)
 ```
 $ astro check
-16:11:49 [types] Generated 81ms
-16:11:49 [check] Getting diagnostics for Astro files in C:\Users\rosal\OneDrive\Documentos\Dev\new-portfolio...
 Result (28 files): 
 - 0 errors
 - 0 warnings
@@ -69,47 +77,28 @@ Result (28 files):
 ```
 Exit code: 0
 
-### 2. Unit Tests (`pnpm run test`)
+### 3. Unit Tests & Coverage (`pnpm run test:coverage`)
 ```
-$ vitest run
-
- RUN  v5.0.3 C:/Users/rosal/OneDrive/Documentos/Dev/new-portfolio
-
- ✓ tests/data/portfolio.test.ts (13 tests) 8ms
- ✓ tests/seo/schema.test.ts (3 tests) 5ms
-
- Test Files  2 passed (2)
-      Tests  16 passed (16)
-   Start at  16:11:57
-   Duration  221ms (transform 63%, import 19%, worker 10%, tests 8%)
+$ vitest run --coverage
+Test Files  2 passed (2)
+     Tests  16 passed (16)
+Coverage:
+- Stmts: 100%
+- Branch: 90%
+- Funcs: 100%
+- Lines: 100%
 ```
 Exit code: 0
 
-### 3. Build (`pnpm run build`)
+### 4. Build (`pnpm run build`)
 ```
 $ astro build
-16:12:04 [types] Generated 64ms
-16:12:04 [build] output: "static"
-16:12:04 [build] mode: "static"
-16:12:04 [build] directory: C:\Users\rosal\OneDrive\Documentos\Dev\new-portfolio\dist\
-16:12:04 [build] Collecting build info...
-16:12:04 [build] ✓ Completed in 100ms.
-16:12:04 [build] Building static entrypoints...
-16:12:04 [vite] ✓ built in 338ms
-16:12:04 [vite] ✓ built in 87ms
-16:12:04 [build] Rearranging server assets...
-
- generating static routes 
-16:12:04   ├─ /index.html (+20ms) 
-16:12:04 ✓ Completed in 35ms.
-
-16:12:04 [build] ✓ Completed in 508ms.
-16:12:04 [build] 1 page(s) built in 613ms
-16:12:04 [build] Complete!
+Complete! 1 page(s) built in ~800ms
 ```
 Exit code: 0
 
-### 4. Work-Unit Commit
-- Commit: `4226718da8ce47cd9c341ac8b27b44fa61d5b483` (`feat/ci-cd-pipeline`)
-- Message: `ci: setup vitest testing suite and github actions pipeline`
+### 5. Work-Unit Commits
+- `84df921`: `ci: setup vitest testing suite and github actions pipeline`
+- `f9896fa` & `196afa8`: `fix(ci): pin pnpm version 11 and use packageManager canonical source`
+
 
