@@ -95,7 +95,8 @@ export const experienceData: ExperienceCompany[] = [
         period: 'Diciembre 2025 - Febrero 2026',
         achievements: [
           'Diseñé e implementé un sistema de campañas de correo masivo con control de colas mediante Redis, procesando envíos de hasta 100 correos por campaña.',
-          'Desarrollé aplicaciones con Next.js, Prisma y PostgreSQL de complejidad progresiva, desde un CRUD de inventario hasta módulos de autenticación con JWT, hash de contraseñas bcrypt, manejo de sesiones y validaciones. Estandaricé el entorno con Docker en 4 repositorios de aprendizaje, permitiendo levantar cada proyecto con un solo comando.',
+          'Desarrollé aplicaciones con Next.js, Prisma y PostgreSQL de complejidad progresiva, desde un CRUD de inventario hasta módulos de autenticación con JWT, hash de contraseñas bcrypt, manejo de sesiones y validaciones.',
+          'Estandaricé el entorno con Docker en 4 repositorios de aprendizaje, permitiendo levantar cada proyecto con un solo comando.',
           'Redacté documentación técnica de 4 proyectos para facilitar la transferencia de conocimiento del equipo.',
         ],
       },
